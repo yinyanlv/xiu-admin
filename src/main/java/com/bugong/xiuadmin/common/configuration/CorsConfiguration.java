@@ -1,4 +1,4 @@
-package com.bugong.xiuadmin.common;
+package com.bugong.xiuadmin.common.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class CorsConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("*")
                         .allowedMethods("OPTIONS", "POST", "GET", "PUT", "DELETE")
                         .maxAge(3600)
                         .allowCredentials(true);
