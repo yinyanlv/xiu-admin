@@ -13,8 +13,8 @@ public class User {
     private String nickname;
     private String email;
     private String phone;
-    private Integer role;
-    private Integer status;
+    private Integer role = 0;
+    private Integer status = 0;
     private String createBy;
     private Date createTime;
     private String updateBy;

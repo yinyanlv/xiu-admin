@@ -18,13 +18,16 @@ public class UserService {
     @Autowired
     private UserDao<User> userDao;
 
-    public List<User> getUsers() {
+    public List<User> queryPage() {
         ReqArgs r = new ReqArgs();
         return userDao.queryAll(r);
     }
 
-    public void save(User user) {
+    public void create(User user) {
 
         userRepository.save(user);
+    }
+
+    public void update(User user) {
     }
 }

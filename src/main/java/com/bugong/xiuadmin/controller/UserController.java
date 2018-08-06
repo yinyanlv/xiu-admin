@@ -19,15 +19,31 @@ public class UserController {
 
     @RequestMapping(value = "/page")
     @ResponseBody
-    public List<User> getUsers() {
+    public List<User> page() {
 
-        return userService.getUsers();
+        return userService.queryPage();
     }
 
     @RequestMapping(value = "/create")
     @ResponseBody
     public String create(@RequestBody User user) {
-        userService.save(user);
+
+        userService.create(user);
+        return "success";
+    }
+
+    @RequestMapping(value = "/update")
+    @ResponseBody
+    public String update(@RequestBody User user) {
+
+        userService.update(user);
+        return "success";
+    }
+
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public String delete() {
+
         return "success";
     }
 }
