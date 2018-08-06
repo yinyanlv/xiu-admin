@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commonQuery">
+
+    <sql id="filters">
+        <if test="filters != null and filters.size() != 0">
+          <foreach collection="filters" item="item" index="index" open=" WHEN ">
+              <if test="index != 0">AND</if>
+              ${item.name}
+              <choose>
+                  <when test="item.like == true">LIKE</when>
+                  <otherwise>=</otherwise>
+              </choose>
+              ${item.value}
+          </foreach>
+        </if>
+    </sql>
+
+    <sql id="sorts">
+        <if test="sorts != null and sorts.size() != 0">
+            <foreach collection="sorts" item="item" open=" ORDER BY " separator=",">
+                ${item.field} <if test="item.desc">DESC</if>
+            </foreach>
+        </if>
+    </sql>
+
+    <sql id="queryPageBegin">
+        SELECT * FROM (
+    </sql>
+
+    <sql id="queryPageEnd">
+        ) AS query_temp
+        <include refid="commonQuery.filters" />
+        <include refid="commonQuery.sorts" />
+        LIMIT ${page.size}
+        OFFSET ${page.beginIndex}
+    </sql>
+
+    <sql id="defaultQueryPage">
+        <include refid="commonQuery.queryPageBegin" />
+        <include refid="queryPageSql" />
+        <include refid="commonQuery.queryPageEnd" />
+    </sql>
+
+    <sql id="queryAllBegin">
+        SELECT * FROM (
+    </sql>
+
+    <sql id="queryAllEnd">
+        ) AS query_temp
+        <include refid="commonQuery.filters" />
+        <include refid="commonQuery.sorts" />
+    </sql>
+
+    <sql id="defaultQueryAll">
+        <include refid="commonQuery.queryAllBegin" />
+        <include refid="queryAllSql" />
+        <include refid="commonQuery.queryAllEnd" />
+    </sql>
+
+    <sql id="queryCountBegin">
+        SELECT COUNT(0) FROM (
+    </sql>
+
+    <sql id="queryCountEnd">
+        ) AS query_temp
+        <include refid="commonQuery.filters" />
+    </sql>
+
+    <sql id="defaultQueryCount">
+        <include refid="commonQuery.queryCountBegin" />
+        <include refid="queryCountSql" />
+        <include refid="commonQuery.queryCountEnd" />
+    </sql>
+</mapper>

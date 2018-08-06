@@ -15,7 +15,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/get-users")
+    @RequestMapping(value = "/page")
     @ResponseBody
     public List<User> getUsers() {
 
