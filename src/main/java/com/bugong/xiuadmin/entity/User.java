@@ -20,7 +20,6 @@ public class User {
     private String nickname;
     private String email;
     private String phone;
-    @Column(nullable = true)
     private Integer qq;
     private Integer role = 0;
     private Integer status = 0;

@@ -4,14 +4,14 @@
 
     <sql id="filters">
         <if test="filters != null and filters.size() != 0">
-          <foreach collection="filters" item="item" index="index" open=" WHEN ">
+          <foreach collection="filters" item="item" index="index" open=" WHERE ">
               <if test="index != 0">AND</if>
               ${item.name}
               <choose>
                   <when test="item.like == true">LIKE</when>
                   <otherwise>=</otherwise>
               </choose>
-              ${item.value}
+              #{item.value}
           </foreach>
         </if>
     </sql>
@@ -19,7 +19,7 @@
     <sql id="sorts">
         <if test="sorts != null and sorts.size() != 0">
             <foreach collection="sorts" item="item" open=" ORDER BY " separator=",">
-                ${item.field} <if test="item.desc">DESC</if>
+                ${item.name} <if test="item.desc">DESC</if>
             </foreach>
         </if>
     </sql>
@@ -29,11 +29,11 @@
     </sql>
 
     <sql id="queryPageEnd">
-        ) AS query_temp
+        ) AS t
         <include refid="commonQuery.filters" />
         <include refid="commonQuery.sorts" />
-        LIMIT ${page.size}
-        OFFSET ${page.beginIndex}
+        LIMIT ${pagination.size}
+        OFFSET ${pagination.beginIndex}
     </sql>
 
     <sql id="defaultQueryPage">
@@ -47,7 +47,7 @@
     </sql>
 
     <sql id="queryAllEnd">
-        ) AS query_temp
+        ) AS t
         <include refid="commonQuery.filters" />
         <include refid="commonQuery.sorts" />
     </sql>
@@ -63,7 +63,7 @@
     </sql>
 
     <sql id="queryCountEnd">
-        ) AS query_temp
+        ) AS t
         <include refid="commonQuery.filters" />
     </sql>
 

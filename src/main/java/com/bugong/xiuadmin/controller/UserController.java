@@ -2,6 +2,8 @@ package com.bugong.xiuadmin.controller;
 
 import java.util.List;
 
+import com.bugong.xiuadmin.common.query.ReqArgs;
+import com.bugong.xiuadmin.common.query.ReqArgsParser;
 import com.bugong.xiuadmin.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bugong.xiuadmin.entity.User;
 import com.bugong.xiuadmin.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -20,9 +23,10 @@ public class UserController {
 
     @RequestMapping(value = "/page")
     @ResponseBody
-    public List<UserDto> page() {
+    public List<UserDto> page(@RequestParam String args) {
+        ReqArgs reqArgs = ReqArgsParser.parse(args);
 
-        return userService.queryPage();
+        return userService.queryPage(reqArgs);
     }
 
     @RequestMapping(value = "/create")

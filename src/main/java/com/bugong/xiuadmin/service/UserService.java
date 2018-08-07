@@ -22,9 +22,9 @@ public class UserService {
     @Autowired
     private UserDao<UserDto> userDao;
 
-    public List<UserDto> queryPage() {
-        ReqArgs r = new ReqArgs();
-        return userDao.queryAll(r);
+    public List<UserDto> queryPage(ReqArgs reqArgs) {
+
+        return userDao.queryPage(reqArgs);
     }
 
     public void create(User user) {

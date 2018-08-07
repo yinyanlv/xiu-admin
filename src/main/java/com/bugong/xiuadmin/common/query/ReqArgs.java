@@ -7,7 +7,7 @@ public class ReqArgs {
 
     private List<Filter> filters = new ArrayList<Filter>();
     private List<Sort> sorts;
-    private Page page;
+    private Pagination pagination;
 
     public List<Filter> getFilters() {
         return filters;
@@ -25,11 +25,11 @@ public class ReqArgs {
         this.sorts = sorts;
     }
 
-    public Page getPage() {
-        return page;
+    public Pagination getPagination() {
+        return pagination;
     }
 
-    public void setPage(Page page) {
-        this.page = page;
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
     }
 }
