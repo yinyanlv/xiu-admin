@@ -15,10 +15,10 @@ CREATE TABLE user (
   qq VARCHAR(15),
   role TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 普通用户, 1: 管理员, 2: 超级管理员',
   status TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 正常, 1: 禁用',
-  create_time DATETIME NOT NULL DEFAULT NOW(),
   create_by VARCHAR(20) NOT NULL,
-  update_time DATETIME NOT NULL DEFAULT NOW(),
+  create_time DATETIME NOT NULL,
   update_by VARCHAR(20) NOT NULL,
+  update_time DATETIME NOT NULL,
   last_login_time DATETIME,
   UNIQUE KEY username (username)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
@@ -36,10 +36,10 @@ CREATE TABLE category (
   thumbnail VARCHAR(100) COMMENT '分类缩略图地址',
   status TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 正常, 1: 不显示, 2: 不可链接',
   sort TINYINT UNSIGNED,
-  create_time DATETIME NOT NULL DEFAULT NOW(),
   create_by VARCHAR(20) NOT NULL,
-  update_time DATETIME  NOT NULL DEFAULT NOW(),
-  update_by VARCHAR(20) NOT NULL
+  create_time DATETIME NOT NULL,
+  update_by VARCHAR(20) NOT NULL,
+  update_time DATETIME  NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE article (
@@ -53,10 +53,10 @@ CREATE TABLE article (
   status TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 正常, 1: 不显示',
   sort INT UNSIGNED,
   category_id VARCHAR(20) NOT NULL,
-  create_time DATETIME NOT NULL DEFAULT NOW(),
   create_by VARCHAR(20) NOT NULL,
-  update_time DATETIME NOT NULL DEFAULT NOW(),
+  create_time DATETIME NOT NULL,
   update_by VARCHAR(20) NOT NULL,
+  update_time DATETIME NOT NULL,
   CONSTRAINT ibfk_article_1 FOREIGN KEY (category_id) REFERENCES category (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
@@ -70,10 +70,10 @@ CREATE TABLE comment (
   conent VARCHAR(200) NOT NULL,
   status TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 正常, 1: 不显示',
   article_id VARCHAR(20) NOT NULL,
-  create_time DATETIME NOT NULL DEFAULT NOW(),
-  create_by VARCHAR(20),
-  update_time DATETIME NOT NULL DEFAULT NOW(),
+  create_by VARCHAR(20) NOT NULL,
+  create_time DATETIME NOT NULL,
   update_by VARCHAR(20) NOT NULL,
+  update_time DATETIME NOT NULL,
   CONSTRAINT ibfk_comment_1 FOREIGN KEY (article_id) REFERENCES article (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
@@ -88,10 +88,10 @@ CREATE TABLE site (
   qq VARCHAR(15),
   telephone VARCHAR(20),
   icp VARCHAR(20),
-  create_time DATETIME NOT NULL DEFAULT NOW(),
   create_by VARCHAR(20) NOT NULL,
-  update_time DATETIME  NOT NULL DEFAULT NOW(),
-  update_by VARCHAR(20) NOT NULL
+  create_time DATETIME NOT NULL,
+  update_by VARCHAR(20) NOT NULL,
+  update_time DATETIME  NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE log (
@@ -101,5 +101,5 @@ CREATE TABLE log (
   operation TINYINT NOT NULL DEFAULT 0 COMMENT '0: 新增, 1: 修改, 2: 删除',
   type TINYINT NOT NULL DEFAULT 0 COMMENT '0: 分类, 1: 文章, 2: 评论',
   content VARCHAR(200) NOT NULL,
-  create_time DATETIME NOT NULL DEFAULT NOW()
+  create_time DATETIME NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;

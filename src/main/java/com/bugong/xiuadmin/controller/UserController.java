@@ -2,6 +2,7 @@ package com.bugong.xiuadmin.controller;
 
 import java.util.List;
 
+import com.bugong.xiuadmin.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class UserController {
 
     @RequestMapping(value = "/page")
     @ResponseBody
-    public List<User> page() {
+    public List<UserDto> page() {
 
         return userService.queryPage();
     }
@@ -42,8 +43,9 @@ public class UserController {
 
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public String delete() {
+    public String delete(@RequestBody List<Long> idList) {
 
+        userService.delete(idList);
         return "success";
     }
 }

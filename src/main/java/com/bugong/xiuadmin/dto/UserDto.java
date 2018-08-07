@@ -1,34 +1,20 @@
-package com.bugong.xiuadmin.entity;
+package com.bugong.xiuadmin.dto;
 
-import com.bugong.xiuadmin.common.util.Generate;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDto {
     private Long id;
-    @NotBlank(message = "用户名不能为空")
-    @Length(max = 20, message = "用户名最多20个字符")
     private String username;
-    private String password;
     private String nickname;
     private String email;
     private String phone;
-    @Column(nullable = true)
     private Integer qq;
-    private Integer role = 0;
-    private Integer status = 0;
+    private Integer role;
+    private Integer status;
     private String createBy;
     private Date createTime;
     private String updateBy;
     private Date updateTime;
-    @Column(nullable = true)
     private Date lastLoginTime;
 
     public Long getId() {
@@ -45,14 +31,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNickname() {
@@ -141,17 +119,5 @@ public class User {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
-    }
-
-    public void update(User user) {
-        this.username = user.getUsername();
-        this.nickname = user.getNickname();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-        this.qq = user.getQq();
-        this.role = user.getRole();
-        this.status = user.getStatus();
-        this.updateBy = "admin";
-        this.updateTime = Generate.getNow();
     }
 }
