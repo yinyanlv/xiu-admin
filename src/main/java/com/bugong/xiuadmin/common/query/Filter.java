@@ -1,5 +1,7 @@
 package com.bugong.xiuadmin.common.query;
 
+import com.google.common.base.CaseFormat;
+
 public class Filter {
 
     private String name;
@@ -7,7 +9,7 @@ public class Filter {
     private Boolean like;
 
     public String getName() {
-        return name;
+        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
     }
 
     public void setName(String name) {
