@@ -1,5 +1,6 @@
 package com.bugong.xiuadmin.entity;
 
+import com.bugong.xiuadmin.common.context.UserContext;
 import com.bugong.xiuadmin.common.util.Generate;
 import org.hibernate.validator.constraints.Length;
 
@@ -150,7 +151,7 @@ public class User {
         this.qq = user.getQq();
         this.role = user.getRole();
         this.status = user.getStatus();
-        this.updateBy = "admin";
+        this.updateBy = UserContext.getUsername();
         this.updateTime = Generate.getNow();
     }
 }

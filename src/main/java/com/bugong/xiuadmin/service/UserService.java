@@ -1,6 +1,8 @@
 package com.bugong.xiuadmin.service;
 
+import com.bugong.xiuadmin.common.context.UserContext;
 import com.bugong.xiuadmin.common.query.ReqArgs;
+import com.bugong.xiuadmin.common.response.PageData;
 import com.bugong.xiuadmin.common.util.Generate;
 import com.bugong.xiuadmin.dao.UserDao;
 import com.bugong.xiuadmin.dto.UserDto;
@@ -22,18 +24,20 @@ public class UserService {
     @Autowired
     private UserDao<UserDto> userDao;
 
-    public List<UserDto> queryPage(ReqArgs reqArgs) {
-
-        return userDao.queryPage(reqArgs);
+    public PageData queryPage(ReqArgs reqArgs) {
+        int total = userDao.count(reqArgs);
+        List<UserDto> list =  userDao.queryPage(reqArgs);
+        return new PageData(list, total);
     }
 
     public void create(User user) {
 
         Date now = Generate.getNow();
+        String username = UserContext.getUsername();
 
-        user.setCreateBy("admin");
+        user.setCreateBy(username);
         user.setCreateTime(now);
-        user.setUpdateBy("admin");
+        user.setUpdateBy(username);
         user.setUpdateTime(now);
 
         userRepository.save(user);

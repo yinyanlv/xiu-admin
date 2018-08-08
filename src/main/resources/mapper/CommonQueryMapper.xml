@@ -8,10 +8,9 @@
               <if test="index != 0">AND</if>
               ${item.name}
               <choose>
-                  <when test="item.like == true">LIKE</when>
-                  <otherwise>=</otherwise>
+                  <when test="item.like == true">LIKE CONCAT('%', #{item.value}, '%')</when>
+                  <otherwise>= #{item.value}</otherwise>
               </choose>
-              #{item.value}
           </foreach>
         </if>
     </sql>

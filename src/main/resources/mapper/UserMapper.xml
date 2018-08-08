@@ -14,4 +14,11 @@
     <select id="queryAll" resultType="com.bugong.xiuadmin.dto.UserDto">
         <include refid="commonQuery.defaultQueryAll" />
     </select>
+
+    <sql id="queryCountSql">
+        SELECT * FROM user
+    </sql>
+    <select id="count" resultType="Integer">
+        <include refid="commonQuery.defaultQueryCount" />
+    </select>
 </mapper>

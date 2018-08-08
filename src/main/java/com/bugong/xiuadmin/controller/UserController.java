@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.bugong.xiuadmin.common.query.ReqArgs;
 import com.bugong.xiuadmin.common.query.ReqArgsParser;
-import com.bugong.xiuadmin.dto.UserDto;
+import com.bugong.xiuadmin.common.response.PageData;
+import com.bugong.xiuadmin.common.response.PageResponse;
+import com.bugong.xiuadmin.common.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,33 +25,35 @@ public class UserController {
 
     @RequestMapping(value = "/page")
     @ResponseBody
-    public List<UserDto> page(@RequestParam String args) {
-        ReqArgs reqArgs = ReqArgsParser.parse(args);
+    public PageResponse page(@RequestParam String args) {
 
-        return userService.queryPage(reqArgs);
+        ReqArgs reqArgs = ReqArgsParser.parse(args);
+        PageData data = userService.queryPage(reqArgs);
+
+        return new PageResponse(data);
     }
 
     @RequestMapping(value = "/create")
     @ResponseBody
-    public String create(@RequestBody User user) {
+    public Response create(@RequestBody User user) {
 
         userService.create(user);
-        return "success";
+        return Response.success("用户新建成功");
     }
 
     @RequestMapping(value = "/update")
     @ResponseBody
-    public String update(@RequestBody User user) {
+    public Response update(@RequestBody User user) {
 
         userService.update(user);
-        return "success";
+        return Response.success("用户修改成功");
     }
 
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public String delete(@RequestBody List<Long> idList) {
+    public Response delete(@RequestBody List<Long> idList) {
 
         userService.delete(idList);
-        return "success";
+        return Response.success("用户删除成功");
     }
 }
