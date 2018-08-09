@@ -16,7 +16,7 @@ public class ReqArgsParser {
             return objectMapper.readerFor(ReqArgs.class).readValue(args);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

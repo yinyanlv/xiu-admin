@@ -6,7 +6,7 @@ public enum Operator {
     GT(">"),
     GTE(">="),
     LT("<"),
-    TTE("<="),
+    LTE("<="),
     NE("<>"),
     LIKE("LIKE"),
     BLIKE("LIKE"),  // begin like, xxx%
@@ -21,9 +21,5 @@ public enum Operator {
 
     public String getOperator() {
         return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
     }
 }
