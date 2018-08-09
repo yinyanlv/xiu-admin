@@ -2,15 +2,15 @@ package com.bugong.xiuadmin.dto;
 
 public class ComboBoxDto {
 
-    private Object value;
+    private Object code;
     private String name;
 
-    public Object getValue() {
-        return value;
+    public Object getCode() {
+        return code;
     }
 
-    public void setValue(Object value) {
-        this.value = value;
+    public void setCode(Object code) {
+        this.code = code;
     }
 
     public String getName() {

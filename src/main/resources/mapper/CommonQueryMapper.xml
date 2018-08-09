@@ -6,9 +6,9 @@
         <if test="filters != null and filters.size() != 0">
           <foreach collection="filters" item="item" index="index" open=" WHERE ">
               <if test="index != 0">AND</if>
-              ${item.name}
+              ${item.field}
               <choose>
-                  <when test="item.like == true">LIKE CONCAT('%', #{item.value}, '%')</when>
+                  <when test="item.operator != null and item.operator.name() == 'LIKE'">LIKE CONCAT('%', #{item.value}, '%')</when>
                   <otherwise>= #{item.value}</otherwise>
               </choose>
           </foreach>
@@ -18,7 +18,7 @@
     <sql id="sorts">
         <if test="sorts != null and sorts.size() != 0">
             <foreach collection="sorts" item="item" open=" ORDER BY " separator=",">
-                ${item.name} <if test="item.desc">DESC</if>
+                ${item.field} <if test="item.desc">DESC</if>
             </foreach>
         </if>
     </sql>

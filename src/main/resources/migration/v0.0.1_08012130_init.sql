@@ -4,6 +4,22 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_role;
+DROP TABLE IF EXISTS user_status;
+
+CREATE TABLE user_role (
+  code CHAR(10) PRIMARY KEY NOT NULL,
+  name CHAR(10) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+INSERT INTO user_role (code, name) VALUES ('ordinary', '普通用户'), ('admin', '管理员');
+
+CREATE TABLE user_status (
+  code CHAR(10) PRIMARY KEY NOT NULL,
+  name CHAR(10) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+INSERT INTO user_status (code, name) VALUES ('normal', '正常'), ('forbidden', '禁用');
 
 CREATE TABLE user (
   id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -13,8 +29,8 @@ CREATE TABLE user (
   email VARCHAR(30) NOT NULL,
   phone CHAR(11),
   qq VARCHAR(15),
-  role TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 普通用户, 1: 管理员, 2: 超级管理员',
-  status TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 正常, 1: 禁用',
+  role CHAR(10) NOT NULL DEFAULT 'ordinary',
+  status CHAR(10) NOT NULL DEFAULT 'normal',
   create_by VARCHAR(20) NOT NULL,
   create_time DATETIME NOT NULL DEFAULT NOW(),
   update_by VARCHAR(20) NOT NULL,
@@ -23,7 +39,7 @@ CREATE TABLE user (
   UNIQUE KEY username (username)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-INSERT INTO user (username, password, nickname, email, role, create_by, update_by) VALUES ('admin', '111111', '超级管理员', '1761869346@qq.com', 2, 'admin', 'admin');
+INSERT INTO user (username, password, nickname, email, role, create_by, update_by) VALUES ('admin', '111111', '超级管理员', '1761869346@qq.com', 'admin', 'admin', 'admin');
 
 CREATE TABLE category (
   id VARCHAR(20) PRIMARY KEY NOT NULL,

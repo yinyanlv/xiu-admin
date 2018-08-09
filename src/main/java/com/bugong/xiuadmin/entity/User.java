@@ -22,8 +22,8 @@ public class User {
     private String email;
     private String phone;
     private Integer qq;
-    private Integer role = 0;
-    private Integer status = 0;
+    private String role = "ordinary";
+    private String status = "normal";
     private String createBy;
     private Date createTime;
     private String updateBy;
@@ -87,19 +87,19 @@ public class User {
         this.qq = qq;
     }
 
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

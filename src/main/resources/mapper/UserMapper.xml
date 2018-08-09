@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bugong.xiuadmin.dao.UserDao">
+
+    <sql id="queryUsers">
+        SELECT
+          a.id, username, nickname, email, phone,
+          qq, role, status, b.name AS roleName,
+          c.name AS statusName, create_by, create_time, update_by, update_time, last_login_time
+        FROM user AS a
+        LEFT JOIN user_role AS b
+        ON a.role = b.code
+        LEFT JOIN user_status AS c
+        ON a.status = c.code
+    </sql>
+
     <sql id="queryPageSql">
-          SELECT * FROM user
+      <include refid="queryUsers" />
     </sql>
     <select id="queryPage" resultType="com.bugong.xiuadmin.dto.UserDto">
         <include refid="commonQuery.defaultQueryPage" />
     </select>
 
     <sql id="queryAllSql">
-          SELECT * FROM user
+        <include refid="queryUsers" />
     </sql>
     <select id="queryAll" resultType="com.bugong.xiuadmin.dto.UserDto">
         <include refid="commonQuery.defaultQueryAll" />
     </select>
 
     <sql id="queryCountSql">
-        SELECT * FROM user
+        <include refid="queryUsers" />
     </sql>
     <select id="count" resultType="Integer">
         <include refid="commonQuery.defaultQueryCount" />

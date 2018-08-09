@@ -4,16 +4,16 @@ import com.google.common.base.CaseFormat;
 
 public class Filter {
 
-    private String name;
+    private String field;
     private Object value;
-    private Boolean like;
+    private Operator operator;
 
-    public String getName() {
-        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
+    public String getField() {
+        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public Object getValue() {
@@ -24,11 +24,11 @@ public class Filter {
         this.value = value;
     }
 
-    public Boolean getLike() {
-        return like;
+    public Operator getOperator() {
+        return operator;
     }
 
-    public void setLike(Boolean like) {
-        this.like = like;
+    public void setOperator(Operator operator) {
+        this.operator = operator;
     }
 }

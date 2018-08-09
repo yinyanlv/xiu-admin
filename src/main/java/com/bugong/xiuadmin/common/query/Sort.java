@@ -2,15 +2,15 @@ package com.bugong.xiuadmin.common.query;
 
 public class Sort {
 
-    private String name;
+    private String field;
     private Boolean desc;
 
-    public String getName() {
-        return name;
+    public String getField() {
+        return field;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public Boolean getDesc() {

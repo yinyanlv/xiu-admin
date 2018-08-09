@@ -3,14 +3,17 @@ package com.bugong.xiuadmin.dto;
 import java.util.Date;
 
 public class UserDto {
+
     private Long id;
     private String username;
     private String nickname;
     private String email;
     private String phone;
     private Integer qq;
-    private Integer role;
-    private Integer status;
+    private String role;
+    private String roleName;
+    private String status;
+    private String statusName;
     private String createBy;
     private Date createTime;
     private String updateBy;
@@ -65,20 +68,36 @@ public class UserDto {
         this.qq = qq;
     }
 
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Integer getStatus() {
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getCreateBy() {
