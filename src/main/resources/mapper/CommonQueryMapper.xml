@@ -8,7 +8,7 @@
               <if test="index != 0">AND</if>
               ${item.field}
               <if test="item.operator == null">
-                  = #{item.value}
+                  LIKE CONCAT('%', #{item.value}, '%')
               </if>
               <if test="item.operator != null">
                   <choose>

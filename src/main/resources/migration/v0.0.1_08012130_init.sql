@@ -9,17 +9,19 @@ DROP TABLE IF EXISTS user_status;
 
 CREATE TABLE user_role (
   code CHAR(10) PRIMARY KEY NOT NULL,
-  name CHAR(10) NOT NULL
+  name CHAR(10) NOT NULL,
+  sort TINYINT UNSIGNED NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-INSERT INTO user_role (code, name) VALUES ('ordinary', '普通用户'), ('admin', '管理员');
+INSERT INTO user_role (code, name, sort) VALUES ('ordinary', '普通用户', 1), ('admin', '管理员', 2);
 
 CREATE TABLE user_status (
   code CHAR(10) PRIMARY KEY NOT NULL,
-  name CHAR(10) NOT NULL
+  name CHAR(10) NOT NULL,
+  sort TINYINT UNSIGNED NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-INSERT INTO user_status (code, name) VALUES ('normal', '正常'), ('forbidden', '禁用');
+INSERT INTO user_status (code, name, sort) VALUES ('normal', '正常', 1), ('forbidden', '禁用', 2);
 
 CREATE TABLE user (
   id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,

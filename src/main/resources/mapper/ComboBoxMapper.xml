@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bugong.xiuadmin.dao.ComboBoxDao">
     <select id="list" resultType="com.bugong.xiuadmin.dto.ComboBoxDto">
-          SELECT code, name FROM ${tableName};
+          SELECT code, name FROM ${tableName} ORDER BY sort
     </select>
 </mapper>

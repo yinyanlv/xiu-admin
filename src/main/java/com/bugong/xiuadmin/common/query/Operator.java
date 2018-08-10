@@ -7,7 +7,7 @@ public enum Operator {
     GTE(">="),
     LT("<"),
     LTE("<="),
-    NE("<>"),
+    NEQ("<>"),
     LIKE("LIKE"),
     BLIKE("LIKE"),  // begin like, xxx%
     ELIKE("LIKE"),  // end like, %xxx
