@@ -4,7 +4,7 @@ import java.time.Clock;
 
 public class AppClock {
 
-    private static ThreadLocal<Clock> clock = ThreadLocal.withInitial(Clock::systemDefaultZone);
+    private static ThreadLocal<Clock> clock = ThreadLocal.withInitial(Clock::systemUTC);
 
     public static Clock getClock() {
         return clock.get();
