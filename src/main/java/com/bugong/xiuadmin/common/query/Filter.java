@@ -7,6 +7,7 @@ public class Filter {
     private String field;
     private Object value;
     private Operator operator;
+    private FieldType fieldType;
 
     public String getField() {
         return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field);
@@ -30,5 +31,13 @@ public class Filter {
 
     public void setOperator(Operator operator) {
         this.operator = operator;
+    }
+
+    public FieldType getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(FieldType fieldType) {
+        this.fieldType = fieldType;
     }
 }
