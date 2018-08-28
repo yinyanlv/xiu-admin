@@ -154,4 +154,10 @@ public class User {
         this.updateBy = UserContext.getUsername();
         this.updateTime = Generate.getNow();
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+        this.updateBy = UserContext.getUsername();
+        this.updateTime = Generate.getNow();
+    }
 }

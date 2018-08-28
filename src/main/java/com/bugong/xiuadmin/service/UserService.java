@@ -43,10 +43,21 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public User getUserById(Long id) {
+
+        return userRepository.getOne(id);
+    }
+
     @Transactional
     public void update(User user) {
 
         userRepository.getOne(user.getId()).update(user);
+    }
+
+    @Transactional
+    public void updatePassword(Long id, String password) {
+
+        userRepository.getOne(id).updatePassword(password);
     }
 
     @Transactional

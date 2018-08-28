@@ -7,6 +7,7 @@ import com.bugong.xiuadmin.common.query.ReqArgsParser;
 import com.bugong.xiuadmin.common.response.PageData;
 import com.bugong.xiuadmin.common.response.PageResponse;
 import com.bugong.xiuadmin.common.response.Response;
+import com.bugong.xiuadmin.dto.UserModifyPasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,35 @@ public class UserController {
 
         userService.update(user);
         return Response.success("用户修改成功");
+    }
+
+    @RequestMapping(value = "/modify-password")
+    @ResponseBody
+    public Response modifyPassword(@RequestBody UserModifyPasswordDto userModifyPasswordDto) {
+
+        Long id = userModifyPasswordDto.getId();
+        User user = userService.getUserById(id);
+
+        if (user.getId() != null) {
+            return Response.failed("该用户不存在");
+        }
+
+        String oldPassword = userModifyPasswordDto.getOldPassword();
+
+        if (user.getPassword() != oldPassword) {
+            return Response.failed("原密码不正确");
+        }
+
+        String password = userModifyPasswordDto.getPassword();
+        String confirmPassword = userModifyPasswordDto.getPassword();
+
+        if (password != confirmPassword) {
+            return Response.failed("两次输入的新密码不一致");
+        }
+
+        userService.updatePassword(id, password);
+
+        return Response.success("密码更改成功");
     }
 
     @RequestMapping(value = "/delete")
