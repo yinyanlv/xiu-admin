@@ -57,13 +57,13 @@ public class UserController {
         Long id = userModifyPasswordDto.getId();
         User user = userService.getUserById(id);
 
-        if (user.getId() != null) {
+        if (user.getId() == null) {
             return Response.failed("该用户不存在");
         }
 
         String oldPassword = userModifyPasswordDto.getOldPassword();
 
-        if (user.getPassword() != oldPassword) {
+        if (!oldPassword.equals(user.getPassword())) {
             return Response.failed("原密码不正确");
         }
 
