@@ -7,6 +7,7 @@ import com.bugong.xiuadmin.common.query.ReqArgsParser;
 import com.bugong.xiuadmin.common.response.PageData;
 import com.bugong.xiuadmin.common.response.PageResponse;
 import com.bugong.xiuadmin.common.response.Response;
+import com.bugong.xiuadmin.dto.UserCreateDto;
 import com.bugong.xiuadmin.dto.UserModifyPasswordDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.bugong.xiuadmin.entity.User;
 import com.bugong.xiuadmin.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/page")
     @ResponseBody
@@ -36,9 +41,15 @@ public class UserController {
 
     @RequestMapping(value = "/create")
     @ResponseBody
-    public Response create(@RequestBody User user) {
+    public Response create(@RequestBody UserCreateDto userCreateDto) {
 
-        userService.create(user);
+        if (!userCreateDto.getPassword().equals(userCreateDto.getConfirmPassword())) {
+            return Response.failed("两次输入的密码不一致");
+        }
+
+        userCreateDto.setPassword(bCryptPasswordEncoder.encode(userCreateDto.getPassword()));
+        userService.create(userCreateDto);
+
         return Response.success("用户新建成功");
     }
 
@@ -61,7 +72,7 @@ public class UserController {
             return Response.failed("该用户不存在");
         }
 
-        String oldPassword = userModifyPasswordDto.getOldPassword();
+        String oldPassword = bCryptPasswordEncoder.encode(userModifyPasswordDto.getOldPassword());
 
         if (!oldPassword.equals(user.getPassword())) {
             return Response.failed("原密码不正确");
@@ -74,7 +85,7 @@ public class UserController {
             return Response.failed("两次输入的新密码不一致");
         }
 
-        userService.updatePassword(id, password);
+        userService.updatePassword(id, bCryptPasswordEncoder.encode(password));
 
         return Response.success("密码更改成功");
     }

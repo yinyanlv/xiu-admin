@@ -5,6 +5,7 @@ import com.bugong.xiuadmin.common.query.ReqArgs;
 import com.bugong.xiuadmin.common.response.PageData;
 import com.bugong.xiuadmin.common.util.Generate;
 import com.bugong.xiuadmin.dao.UserDao;
+import com.bugong.xiuadmin.dto.UserCreateDto;
 import com.bugong.xiuadmin.dto.UserDto;
 import com.bugong.xiuadmin.entity.User;
 import com.bugong.xiuadmin.repository.UserRepository;
@@ -30,11 +31,20 @@ public class UserService {
         return new PageData(list, total);
     }
 
-    public void create(User user) {
+    public void create(UserCreateDto userCreateDto) {
 
         Date now = Generate.getNow();
         String username = UserContext.getUsername();
+        User user = new User();
 
+        user.setUsername(userCreateDto.getUsername());
+        user.setNickname(userCreateDto.getNickname());
+        user.setEmail(userCreateDto.getEmail());
+        user.setPhone(userCreateDto.getPhone());
+        user.setQq(userCreateDto.getQq());
+        user.setRole(userCreateDto.getRole());
+        user.setStatus(userCreateDto.getStatus());
+        user.setPassword(userCreateDto.getPassword());
         user.setCreateBy(username);
         user.setCreateTime(now);
         user.setUpdateBy(username);

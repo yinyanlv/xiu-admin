@@ -26,7 +26,7 @@ INSERT INTO user_status (code, name, sort) VALUES ('normal', '正常', 1), ('for
 CREATE TABLE user (
   id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   username VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  password VARCHAR(80) NOT NULL,
   nickname VARCHAR(20),
   email VARCHAR(30) NOT NULL,
   phone CHAR(11),
