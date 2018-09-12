@@ -24,7 +24,7 @@ CREATE TABLE user_status (
 INSERT INTO user_status (code, name, sort) VALUES ('normal', '正常', 1), ('forbidden', '禁用', 2);
 
 CREATE TABLE user (
-  id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  id CHAR(32) PRIMARY KEY NOT NULL,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(80) NOT NULL,
   nickname VARCHAR(20),
@@ -41,7 +41,7 @@ CREATE TABLE user (
   UNIQUE KEY username (username)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-INSERT INTO user (username, password, nickname, email, role, create_by, update_by) VALUES ('admin', '111111', '超级管理员', '1761869346@qq.com', 'admin', 'admin', 'admin');
+INSERT INTO user (id, username, password, nickname, email, role, create_by, update_by) VALUES ('abc', 'admin', '111111', '超级管理员', '1761869346@qq.com', 'admin', 'admin', 'admin');
 
 CREATE TABLE category (
   id VARCHAR(20) PRIMARY KEY NOT NULL,

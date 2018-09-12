@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserDto {
 
-    private Long id;
+    private String id;
     private String username;
     private String nickname;
     private String email;
@@ -20,11 +20,11 @@ public class UserDto {
     private Date updateTime;
     private Date lastLoginTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

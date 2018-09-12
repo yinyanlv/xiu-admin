@@ -37,6 +37,7 @@ public class UserService {
         String username = UserContext.getUsername();
         User user = new User();
 
+        user.setId(Generate.getUUID());
         user.setUsername(userCreateDto.getUsername());
         user.setNickname(userCreateDto.getNickname());
         user.setEmail(userCreateDto.getEmail());
@@ -53,7 +54,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
 
         return userRepository.getOne(id);
     }
@@ -65,13 +66,13 @@ public class UserService {
     }
 
     @Transactional
-    public void updatePassword(Long id, String password) {
+    public void updatePassword(String id, String password) {
 
         userRepository.getOne(id).updatePassword(password);
     }
 
     @Transactional
-    public void delete(List<Long> idList) {
+    public void delete(List<String> idList) {
 
         idList.forEach(id -> {
             userRepository.deleteById(id);

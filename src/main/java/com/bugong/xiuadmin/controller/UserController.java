@@ -65,7 +65,7 @@ public class UserController {
     @ResponseBody
     public Response modifyPassword(@RequestBody UserModifyPasswordDto userModifyPasswordDto) {
 
-        Long id = userModifyPasswordDto.getId();
+        String id = userModifyPasswordDto.getId();
         User user = userService.getUserById(id);
 
         if (user.getId() == null) {
@@ -92,7 +92,7 @@ public class UserController {
 
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Response delete(@RequestBody List<Long> idList) {
+    public Response delete(@RequestBody List<String> idList) {
 
         userService.delete(idList);
         return Response.success("用户删除成功");

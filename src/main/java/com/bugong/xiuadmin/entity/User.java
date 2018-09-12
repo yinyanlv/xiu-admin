@@ -12,8 +12,7 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     @NotBlank(message = "用户名不能为空")
     @Length(max = 20, message = "用户名最多20个字符")
     private String username;
@@ -31,11 +30,11 @@ public class User {
     @Column(nullable = true)
     private Date lastLoginTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

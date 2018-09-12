@@ -6,12 +6,11 @@ import java.util.UUID;
 
 public class Generate {
 
-    public static String getUuid() {
-        return UUID.randomUUID().toString();
+    public static Date getNow() {
+        return Date.from(Instant.now(AppClock.getClock()));
     }
 
-    public static Date getNow() {
-
-        return Date.from(Instant.now(AppClock.getClock()));
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }
