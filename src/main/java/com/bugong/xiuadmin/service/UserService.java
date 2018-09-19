@@ -7,7 +7,7 @@ import com.bugong.xiuadmin.common.util.Generate;
 import com.bugong.xiuadmin.dao.UserDao;
 import com.bugong.xiuadmin.dto.UserCreateDto;
 import com.bugong.xiuadmin.dto.UserDto;
-import com.bugong.xiuadmin.entity.User;
+import com.bugong.xiuadmin.entity.UserEntity;
 import com.bugong.xiuadmin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class UserService {
 
         Date now = Generate.getNow();
         String username = UserContext.getUsername();
-        User user = new User();
+        UserEntity user = new UserEntity();
 
         user.setId(Generate.getUUID());
         user.setUsername(userCreateDto.getUsername());
@@ -54,13 +54,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(String id) {
+    public UserEntity getUserById(String id) {
 
         return userRepository.getOne(id);
     }
 
     @Transactional
-    public void update(User user) {
+    public void update(UserEntity user) {
 
         userRepository.getOne(user.getId()).update(user);
     }

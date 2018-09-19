@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.bugong.xiuadmin.entity.User;
+import com.bugong.xiuadmin.entity.UserEntity;
 import com.bugong.xiuadmin.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,7 +55,7 @@ public class UserController {
 
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Response update(@RequestBody User user) {
+    public Response update(@RequestBody UserEntity user) {
 
         userService.update(user);
         return Response.success("用户修改成功");
@@ -66,7 +66,7 @@ public class UserController {
     public Response modifyPassword(@RequestBody UserModifyPasswordDto userModifyPasswordDto) {
 
         String id = userModifyPasswordDto.getId();
-        User user = userService.getUserById(id);
+        UserEntity user = userService.getUserById(id);
 
         if (user.getId() == null) {
             return Response.failed("该用户不存在");

@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
     @Id
     private String id;
     @NotBlank(message = "用户名不能为空")
@@ -142,7 +142,7 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public void update(User user) {
+    public void update(UserEntity user) {
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         this.email = user.getEmail();
