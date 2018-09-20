@@ -142,14 +142,14 @@ public class UserEntity {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public void update(UserEntity user) {
-        this.username = user.getUsername();
-        this.nickname = user.getNickname();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-        this.qq = user.getQq();
-        this.role = user.getRole();
-        this.status = user.getStatus();
+    public void update(UserEntity userEntity) {
+        this.username = userEntity.getUsername();
+        this.nickname = userEntity.getNickname();
+        this.email = userEntity.getEmail();
+        this.phone = userEntity.getPhone();
+        this.qq = userEntity.getQq();
+        this.role = userEntity.getRole();
+        this.status = userEntity.getStatus();
         this.updateBy = UserContext.getUsername();
         this.updateTime = Generate.getNow();
     }

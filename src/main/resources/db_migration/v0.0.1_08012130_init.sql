@@ -37,15 +37,23 @@ CREATE TABLE user (
   UNIQUE KEY username (username)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
+CREATE TABLE category_status (
+  code CHAR(10) PRIMARY KEY NOT NULL,
+  name CHAR(10) NOT NULL,
+  sort TINYINT UNSIGNED NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 CREATE TABLE category (
   id CHAR(32) PRIMARY KEY NOT NULL,
-  parent_id VARCHAR(20),
+  parent_id VARCHAR(32),
   name VARCHAR(20) NOT NULL,
   keywords VARCHAR(200),
   description VARCHAR(200),
   content VARCHAR(20000),
-  banner VARCHAR(100) COMMENT '分类banner地址',
-  thumbnail VARCHAR(100) COMMENT '分类缩略图地址',
+  banner_name VARCHAR(100) COMMENT '分类banner文件名称',
+  banner_original_name VARCHAR(100) COMMENT '分类banner文件原始名称',
+  thumbnail_name VARCHAR(100) COMMENT '分类缩略图文件名称',
+  thumbnail_original_name VARCHAR(100) COMMENT '分类缩略图文件原始名称',
   status VARCHAR(10) NOT NULL DEFAULT 'normal' COMMENT 'normal: 正常, hide: 不显示',
   sort TINYINT UNSIGNED,
   create_by VARCHAR(20) NOT NULL,
@@ -60,8 +68,10 @@ CREATE TABLE article (
   keywords VARCHAR(200),
   description VARCHAR(200),
   content VARCHAR(20000) NOT NULL,
-  banner VARCHAR(100) COMMENT '文章banner地址',
-  thumbnail VARCHAR(100) COMMENT '文章缩略图地址',
+  banner_name VARCHAR(100) COMMENT '文章banner文件名称',
+  banner_original_name VARCHAR(100) COMMENT '文章banner文件原始名称',
+  thumbnail_name VARCHAR(100) COMMENT '文章缩略图文件名称',
+  thumbnail_original_name VARCHAR(100) COMMENT '文章缩略图文件原始名称',
   status VARCHAR(10) NOT NULL DEFAULT 'normal' COMMENT 'normal: 正常, hide: 不显示',
   sort INT UNSIGNED,
   category_id VARCHAR(20) NOT NULL,
@@ -122,3 +132,5 @@ INSERT INTO user_role (code, name, sort) VALUES ('ordinary', '普通用户', 1),
 INSERT INTO user_status (code, name, sort) VALUES ('normal', '正常', 1), ('forbidden', '禁用', 2);
 
 INSERT INTO user (id, username, password, nickname, email, role, create_by, update_by) VALUES ('abc', 'admin', '111111', '超级管理员', '1761869346@qq.com', 'admin', 'admin', 'admin');
+
+INSERT INTO category_status (code, name, sort) VALUES ('normal', '正常', 1), ('hide', '不显示', 2);

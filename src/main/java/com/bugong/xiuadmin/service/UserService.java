@@ -35,23 +35,23 @@ public class UserService {
 
         Date now = Generate.getNow();
         String username = UserContext.getUsername();
-        UserEntity user = new UserEntity();
+        UserEntity userEntity = new UserEntity();
 
-        user.setId(Generate.getUUID());
-        user.setUsername(userCreateDto.getUsername());
-        user.setNickname(userCreateDto.getNickname());
-        user.setEmail(userCreateDto.getEmail());
-        user.setPhone(userCreateDto.getPhone());
-        user.setQq(userCreateDto.getQq());
-        user.setRole(userCreateDto.getRole());
-        user.setStatus(userCreateDto.getStatus());
-        user.setPassword(userCreateDto.getPassword());
-        user.setCreateBy(username);
-        user.setCreateTime(now);
-        user.setUpdateBy(username);
-        user.setUpdateTime(now);
+        userEntity.setId(Generate.getUUID());
+        userEntity.setUsername(userCreateDto.getUsername());
+        userEntity.setNickname(userCreateDto.getNickname());
+        userEntity.setEmail(userCreateDto.getEmail());
+        userEntity.setPhone(userCreateDto.getPhone());
+        userEntity.setQq(userCreateDto.getQq());
+        userEntity.setRole(userCreateDto.getRole());
+        userEntity.setStatus(userCreateDto.getStatus());
+        userEntity.setPassword(userCreateDto.getPassword());
+        userEntity.setCreateBy(username);
+        userEntity.setCreateTime(now);
+        userEntity.setUpdateBy(username);
+        userEntity.setUpdateTime(now);
 
-        userRepository.save(user);
+        userRepository.save(userEntity);
     }
 
     public UserEntity getUserById(String id) {
@@ -60,9 +60,9 @@ public class UserService {
     }
 
     @Transactional
-    public void update(UserEntity user) {
+    public void update(UserEntity userEntity) {
 
-        userRepository.getOne(user.getId()).update(user);
+        userRepository.getOne(userEntity.getId()).update(userEntity);
     }
 
     @Transactional

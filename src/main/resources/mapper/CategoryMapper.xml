@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bugong.xiuadmin.dao.CategoryDao">
+
+    <sql id="queryCategories">
+        SELECT
+          id, parent_id, a.name, keywords, description, content, banner_name, banner_original_name,
+          thumbnail_name, thumbnail_original_name, status, b.name AS statusName,
+          a.sort, create_by, create_time, update_by, update_time
+        FROM category AS a
+        LEFT JOIN category_status AS b
+        ON a.status = b.code
+    </sql>
+
+    <sql id="queryPageSql">
+      <include refid="queryCategories" />
+    </sql>
+    <select id="queryPage" resultType="com.bugong.xiuadmin.dto.CategoryDto">
+        <include refid="commonQuery.defaultQueryPage" />
+    </select>
+
+    <sql id="queryAllSql">
+        <include refid="queryCategories" />
+    </sql>
+    <select id="queryAll" resultType="com.bugong.xiuadmin.dto.CategoryDto">
+        <include refid="commonQuery.defaultQueryAll" />
+    </select>
+
+    <sql id="queryCountSql">
+        <include refid="queryCategories" />
+    </sql>
+    <select id="count" resultType="Integer">
+        <include refid="commonQuery.defaultQueryCount" />
+    </select>
+</mapper>

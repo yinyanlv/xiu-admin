@@ -55,9 +55,9 @@ public class UserController {
 
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Response update(@RequestBody UserEntity user) {
+    public Response update(@RequestBody UserEntity userEntity) {
 
-        userService.update(user);
+        userService.update(userEntity);
         return Response.success("用户修改成功");
     }
 
@@ -66,15 +66,15 @@ public class UserController {
     public Response modifyPassword(@RequestBody UserModifyPasswordDto userModifyPasswordDto) {
 
         String id = userModifyPasswordDto.getId();
-        UserEntity user = userService.getUserById(id);
+        UserEntity userEntity = userService.getUserById(id);
 
-        if (user.getId() == null) {
+        if (userEntity.getId() == null) {
             return Response.failed("该用户不存在");
         }
 
         String oldPassword = bCryptPasswordEncoder.encode(userModifyPasswordDto.getOldPassword());
 
-        if (!oldPassword.equals(user.getPassword())) {
+        if (!oldPassword.equals(userEntity.getPassword())) {
             return Response.failed("原密码不正确");
         }
 
