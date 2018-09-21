@@ -6,6 +6,9 @@ DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS user_status;
+DROP TABLE IF EXISTS category_status;
+DROP TABLE IF EXISTS article_status;
+DROP TABLE IF EXISTS comment_status;
 
 CREATE TABLE user_role (
   code CHAR(10) PRIMARY KEY NOT NULL,
@@ -62,6 +65,12 @@ CREATE TABLE category (
   update_time DATETIME  NOT NULL DEFAULT NOW()
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
+CREATE TABLE article_status(
+  code CHAR(10) PRIMARY KEY NOT NULL,
+  name CHAR(10) NOT NULL,
+  sort TINYINT UNSIGNED NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 CREATE TABLE article (
   id CHAR(32) PRIMARY KEY NOT NULL,
   title VARCHAR(200) NOT NULL,
@@ -80,6 +89,12 @@ CREATE TABLE article (
   update_by VARCHAR(20) NOT NULL,
   update_time DATETIME NOT NULL DEFAULT NOW(),
   CONSTRAINT ibfk_article_1 FOREIGN KEY (category_id) REFERENCES category (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE comment_status(
+  code CHAR(10) PRIMARY KEY NOT NULL,
+  name CHAR(10) NOT NULL,
+  sort TINYINT UNSIGNED NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE comment (
@@ -128,9 +143,9 @@ CREATE TABLE log (
 
 
 INSERT INTO user_role (code, name, sort) VALUES ('ordinary', '普通用户', 1), ('admin', '管理员', 2);
-
 INSERT INTO user_status (code, name, sort) VALUES ('normal', '正常', 1), ('forbidden', '禁用', 2);
-
+INSERT INTO category_status (code, name, sort) VALUES ('normal', '正常', 1), ('hide', '不显示', 2);
+INSERT INTO article_status (code, name, sort) VALUES ('normal', '正常', 1), ('hide', '不显示', 2);
+INSERT INTO comment_status (code, name, sort) VALUES ('normal', '正常', 1), ('hide', '不显示', 2);
 INSERT INTO user (id, username, password, nickname, email, role, create_by, update_by) VALUES ('abc', 'admin', '111111', '超级管理员', '1761869346@qq.com', 'admin', 'admin', 'admin');
 
-INSERT INTO category_status (code, name, sort) VALUES ('normal', '正常', 1), ('hide', '不显示', 2);
