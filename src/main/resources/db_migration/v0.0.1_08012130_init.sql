@@ -48,7 +48,7 @@ CREATE TABLE category_status (
 
 CREATE TABLE category (
   id CHAR(32) PRIMARY KEY NOT NULL,
-  parent_id VARCHAR(32),
+  parent_id CHAR(32),
   name VARCHAR(20) NOT NULL,
   keywords VARCHAR(200),
   description VARCHAR(200),
@@ -83,7 +83,7 @@ CREATE TABLE article (
   thumbnail_original_name VARCHAR(100) COMMENT '文章缩略图文件原始名称',
   status VARCHAR(10) NOT NULL DEFAULT 'normal' COMMENT 'normal: 正常, hide: 不显示',
   sort INT UNSIGNED,
-  category_id VARCHAR(20) NOT NULL,
+  category_id CHAR(32) NOT NULL,
   create_by VARCHAR(20) NOT NULL,
   create_time DATETIME NOT NULL DEFAULT NOW(),
   update_by VARCHAR(20) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE comment (
   qq VARCHAR(15),
   conent VARCHAR(200) NOT NULL,
   status VARCHAR(10) NOT NULL DEFAULT 'normal' COMMENT 'normal: 正常, hide: 不显示',
-  article_id VARCHAR(20) NOT NULL,
+  article_id CHAR(32) NOT NULL,
   create_by VARCHAR(20) NOT NULL,
   create_time DATETIME NOT NULL DEFAULT NOW(),
   update_by VARCHAR(20) NOT NULL,

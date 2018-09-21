@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bugong.xiuadmin.dao.CategoryDao">
+<mapper namespace="com.bugong.xiuadmin.dao.ArticleDao">
 
-    <sql id="queryCategories">
+    <sql id="queryArticles">
         SELECT
-          id, parent_id, a.name, keywords, description, content, banner_name, banner_original_name,
-          thumbnail_name, thumbnail_original_name, status, b.name AS status_name,
+          a.id, a.title, a.keywords, a.description, a.content, a.banner_name, a.banner_original_name,
+          a.thumbnail_name, a.thumbnail_original_name, a.status, b.name AS status_name, a.category_id, c.name AS category_name
           a.sort, create_by, create_time, update_by, update_time
-        FROM category AS a
-        LEFT JOIN category_status AS b
+        FROM article AS a
+        LEFT JOIN article_status AS b
         ON a.status = b.code
+        LEFT JOIN category AS c
+        ON a.category_id = c.id
     </sql>
 
     <sql id="queryPageSql">
-      <include refid="queryCategories" />
+      <include refid="queryArticles" />
     </sql>
     <select id="queryPage" resultType="com.bugong.xiuadmin.dto.CategoryDto">
         <include refid="commonQuery.defaultQueryPage" />
     </select>
 
     <sql id="queryAllSql">
-        <include refid="queryCategories" />
+        <include refid="queryArticles" />
     </sql>
     <select id="queryAll" resultType="com.bugong.xiuadmin.dto.CategoryDto">
         <include refid="commonQuery.defaultQueryAll" />
     </select>
 
     <sql id="queryCountSql">
-        <include refid="queryCategories" />
+        <include refid="queryArticles" />
     </sql>
     <select id="count" resultType="Integer">
         <include refid="commonQuery.defaultQueryCount" />
